@@ -1,4 +1,4 @@
-# WaitAndNotify
+# WaitAndNotify   Synchronized和Lock  
 使用两种方式：1是基于忙等待的方式通知其他线程2 基于wait 和notify的机制通知其他线程  
 Synchronized和Lock是两种不同的多线程同步机制 所以在同步中不要同时使用Synchronized和Lock    
 
