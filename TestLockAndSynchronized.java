@@ -17,9 +17,15 @@ public class TestLockAndSynchronized {
 		private int value = 0;
 		Lock lock = new ReentrantLock();
 		
-		public synchronized void addValueSync(){
-			this.value++;
-			System.out.println(Thread.currentThread().getName()+":"+value);
+		public void addValueSync(){
+			synchronized (this) {
+				for(int i=0;i<5;i++){
+					this.value++;
+					System.out.println(Thread.currentThread().getName()+":"+value);
+				}
+				
+			}
+		
 		}
 		
 		public void addValueLock(){
@@ -46,7 +52,7 @@ public class TestLockAndSynchronized {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				for(int i=0;i<5;i++){
+		
 					st.addValueSync();
 					try {
 						Thread.sleep(20);
@@ -54,7 +60,6 @@ public class TestLockAndSynchronized {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}
 			}
 		});
 		
@@ -63,14 +68,12 @@ public class TestLockAndSynchronized {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				for(int i=0;i<5;i++){
 					st.addValueSync();
 					try {
 						Thread.sleep(20);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
 				}
 			}
 		});
